@@ -1,0 +1,31 @@
+{
+  "name": "mysavings",
+  "version": "1.0.0",
+  "description": "Programa com a intenção de ajudar a controlar os gastos / recebimentos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/silva-gabrielmiranda/mysavings.git"
+  },
+  "keywords": [
+    "Savings",
+    "Finanças",
+    "Economia"
+  ],
+  "author": "Gabriel Miranda da Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/silva-gabrielmiranda/mysavings/issues"
+  },
+  "homepage": "https://github.com/silva-gabrielmiranda/mysavings#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.27",
+    "nodemon": "^2.0.4",
+    "uuid": "^8.3.0"
+  }
+}
