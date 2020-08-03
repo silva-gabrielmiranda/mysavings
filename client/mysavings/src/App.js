@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Grid, TextField, Typography, Paper, FormControl, InputAdornment, Input, MenuItem, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -20,14 +21,14 @@ const valueType = [
 function App() {
 
 	const classes = useStyles();
-	const [values,setValues] = useState({
+	const [values, setValues] = useState({
 		type: "",
 		amount: ""
 	})
 
-	const handleChange = field => event => setValues({...values, [field] : event.target.value})
+	const handleChange = field => event => setValues({ ...values, [field]: event.target.value })
 
-	const handleSubmit = () => console.log(values);
+	const handleSubmit = () => axios.post("http://localhost:3001/newData", values).then(response => console.log(response.data)).catch(err => console.error(err));
 
 	return (
 		<Grid container justify="center" className={classes.root} alignItems="center">
@@ -47,8 +48,8 @@ function App() {
 								<Input
 									id="standard-adornment-amount"
 									startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-									value = {values.amount}
-									onChange = {handleChange("amount")}
+									value={values.amount}
+									onChange={handleChange("amount")}
 									placeholder="150,00"
 									className={classes.margins}
 								/>
