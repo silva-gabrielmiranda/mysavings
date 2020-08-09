@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 	},
 	margins: {
-		margin: 10
+		marginBottom: 10
 	}
 }));
 
@@ -34,15 +34,8 @@ function App() {
 		<Grid container justify="center" className={classes.root} alignItems="center">
 			<Grid item xs={5}>
 				<Paper elevation={2}>
-					<Typography align="center" gutterBottom variant="h6">Adicione uma nova despesa ou receita</Typography>
+					<Typography align="center" gutterBottom variant="h6" className={classes.margins}>Adicione uma nova despesa ou receita</Typography>
 					<Grid container justify="center" alignItems="center">
-						<Grid item xs={8}>
-							<FormControl fullWidth>
-								<TextField label="Tipo" select onChange={handleChange("type")} value={values.type} className={classes.margins}>
-									{valueType.map(item => <MenuItem key={item.value} value={item.value}>{item.description}</MenuItem>)}
-								</TextField>
-							</FormControl>
-						</Grid>
 						<Grid item xs={8}>
 							<FormControl fullWidth>
 								<Input
@@ -54,6 +47,19 @@ function App() {
 								/>
 							</FormControl>
 						</Grid>
+						<Grid item xs={8}>
+							<FormControl fullWidth>
+								<TextField label="Descrição" onChange={handleChange("description")} value={values.description} className={classes.margins} placeholder="Conta de luz" />
+							</FormControl>
+						</Grid>
+						<Grid item xs={8}>
+							<FormControl fullWidth>
+								<TextField label="Tipo" select onChange={handleChange("type")} value={values.type} className={classes.margins}>
+									{valueType.map(item => <MenuItem key={item.value} value={item.value}>{item.description}</MenuItem>)}
+								</TextField>
+							</FormControl>
+						</Grid>
+
 						<Grid item xs={8}>
 							<Button fullWidth className={classes.margins} onClick={handleSubmit}>Adicionar</Button>
 						</Grid>
