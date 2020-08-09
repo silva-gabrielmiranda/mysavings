@@ -4,7 +4,8 @@
   "description": "Programa com a intenção de ajudar a controlar os gastos / recebimentos",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "nodemon index"
   },
   "repository": {
     "type": "git",
