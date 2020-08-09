@@ -45,7 +45,6 @@ function App() {
 						<Grid item xs={8}>
 							<FormControl fullWidth>
 								<Input
-									id="standard-adornment-amount"
 									startAdornment={<InputAdornment position="start">R$</InputAdornment>}
 									value = {values.amount}
 									onChange = {handleChange("amount")}
