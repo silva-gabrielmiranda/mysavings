@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 import axios from 'axios';
 import moment from 'moment';
+import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -32,8 +33,11 @@ function App() {
 		price: "",
 		description: ""
 	})
-	const [data, setData] = useState([{ description: "teste" }])
+	const [data, setData] = useState([{ description: "" }])
 	const [date, handleDateChange] = useState(moment.now());
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+	const sendFeedback = (message, type) => enqueueSnackbar(message, { variant: type })
 
 	useEffect(() => {
 		getAllData();
@@ -49,9 +53,14 @@ function App() {
 
 	const handleSubmit = () => {
 		if (values.description !== "" && values.type !== "" && values.amount !== "" && values.price !== "" && date !== "")
-			axios.post("http://localhost:3001/newData", { ...values, date }).then(response => console.info(response.data)).catch(err => console.error(err));
-		else 	
-			console.error("Falta de preenchimento");
+			axios.post("http://localhost:3001/newData", { ...values, date })
+			.then(response => {
+				sendFeedback(response.data.message, "success");
+				setData([...data, values])
+			})
+			.catch(err => sendFeedback(err, "error"));
+		else
+			sendFeedback("Falta de preenchimento", "error");
 	}
 
 	return (
