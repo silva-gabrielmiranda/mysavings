@@ -29,10 +29,10 @@ app.use(express.json());
 app.get("/", (req, res) => res.send("Ok!"))
 
 app.post("/newData", (req, res) => {
-    const { price, amount, type, description } = req.body;
+    const { price, amount, type, description, date } = req.body;
     let Saving = new savings({
         _id: uuidv4(),
-        date: moment.now(),
+        date,
         price,
         amount,
         type,

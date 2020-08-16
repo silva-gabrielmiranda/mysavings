@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, TextField, Typography, Paper, FormControl, InputAdornment, Input, MenuItem, Button } from '@material-ui/core';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 import axios from 'axios';
@@ -22,6 +23,8 @@ const valueType = [
 
 function App() {
 
+	moment.locale("pt-br");
+
 	const classes = useStyles();
 	const [values, setValues] = useState({
 		type: "",
@@ -30,6 +33,7 @@ function App() {
 		description: ""
 	})
 	const [data, setData] = useState([{ description: "teste" }])
+	const [date, handleDateChange] = useState(moment.now());
 
 	useEffect(() => {
 		getAllData();
@@ -43,7 +47,12 @@ function App() {
 	const handleChange = field => event => setValues({ ...values, [field]: event.target.value })
 
 
-	const handleSubmit = () => axios.post("http://localhost:3001/newData", values).then(response => console.log(response.data)).catch(err => console.error(err));
+	const handleSubmit = () => {
+		if (values.description !== "" && values.type !== "" && values.amount !== "" && values.price !== "" && date !== "")
+			axios.post("http://localhost:3001/newData", { ...values, date }).then(response => console.info(response.data)).catch(err => console.error(err));
+		else 	
+			console.error("Falta de preenchimento");
+	}
 
 	return (
 		<Grid container justify="center" className={classes.root} alignItems="center">
@@ -87,6 +96,11 @@ function App() {
 								<TextField label="Tipo" select onChange={handleChange("type")} value={values.type} className={classes.margins}>
 									{valueType.map(item => <MenuItem key={item.value} value={item.value}>{item.description}</MenuItem>)}
 								</TextField>
+							</FormControl>
+						</Grid>
+						<Grid item xs={8}>
+							<FormControl fullWidth>
+								<KeyboardDatePicker value={date} onChange={handleDateChange} format="DD/MM/YYYY" label="Data da compra" />
 							</FormControl>
 						</Grid>
 						<Grid item xs={8}>
