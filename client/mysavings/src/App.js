@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 	margins: {
 		marginBottom: 10
+	},
+	paddingInternal:{
+		paddingTop: 10,
+		paddingBottom: 10,
 	}
 }));
 
@@ -125,7 +129,7 @@ function App() {
 							<Paper elevation={2}>
 								<Typography align="center" gutterBottom variant="h6" className={classes.margins}>{items.description}</Typography>
 								<Grid container justify="center" alignItems="center">
-									<Grid item xs={8}>
+									<Grid item xs={8} className={classes.paddingInternal}>
 										<Typography>Tipo da Ordem: {items.type === 1 ? "Compra" : "Venda"}</Typography>
 										<Typography>Quantidade: {items.amount}</Typography>
 										<Typography>Valor: {items.price}</Typography>
